@@ -18,7 +18,7 @@ function init() {
 
 function render() {
     // Add rendering code here
-    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     angle += 3.0;
     angle %= 360.0
