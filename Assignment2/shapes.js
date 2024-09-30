@@ -1,4 +1,6 @@
 let gl = undefined;
+let program = undefined;
+let uAngle = undefined;
 let cone;
 const matrixStack = new MatrixStack();
 
@@ -25,14 +27,17 @@ function render() {
 
     gl.useProgram(program);
 
-    matrixStack.push();
-    matrixStack.loadIdentity();
-    matrixStack.translate(0.0, 0.0);
-    cone.draw();
-    matrixStack.pop();
+    //matrixStack.push();
+    //matrixStack.loadIdentity();
+    //matrixStack.translate(0.0, 0.0);
+    //cone.draw();
+    //matrixStack.pop();
 
-   // gl.uniform1f(uAngle, angle);
-  //  gl.drawArrays(gl.TRIANGLES, 0, 3);
+    angle += 5.0;
+    angle %= 360.0;
+
+    gl.uniform1f(uAngle, angle);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
 
     requestAnimationFrame(render);
 }
