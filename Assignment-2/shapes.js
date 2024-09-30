@@ -10,7 +10,7 @@ function init() {
     gl.clearColor(0.2, 0.2, 0.2, 1.0);
     gl.enable(gl.DEPTH_TEST);
 
-    let cone = new cone(gl, 36);
+    let cone = new Cone(gl, 36);
     let ms = new MatrixStack();
     let angle = 0.0;
     
