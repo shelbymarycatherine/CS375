@@ -8,7 +8,7 @@ function init() {
     if (!gl) { alert("Your Web browser doesn't support WebGL 2\nPlease contact Dave"); }
 
     // Add initialization code here
-    const cone = new Cone(gl, 20); //Experiment with different values
+    const cone = new Cone(gl, 50); //Experiment with different values
     
     program = initShaders(gl, "vertex-shader", "fragment-shader");
 
