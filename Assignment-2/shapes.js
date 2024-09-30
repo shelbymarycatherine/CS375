@@ -1,4 +1,8 @@
-
+let cone;
+let sphere;
+let cylinder;
+let ms;
+let angle;
 let gl = undefined;
 
 function init() {
@@ -12,12 +16,12 @@ function init() {
     gl.clearColor(0.2, 0.2, 0.2, 1.0);
     gl.enable(gl.DEPTH_TEST);
 
-    let cone = new Cone(gl, 36);
-    let sphere = new Sphere(gl, 36, 18);
-    let cylinder = new Cylinder(gl, 36);
+    cone = new Cone(gl, 36);
+    sphere = new Sphere(gl, 36, 18);
+    cylinder = new Cylinder(gl, 36);
     
-    let ms = new MatrixStack();
-    let angle = 0.0;
+    ms = new MatrixStack();
+    angle = 0.0;
     
     render();
 }
