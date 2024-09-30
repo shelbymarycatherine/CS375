@@ -27,7 +27,7 @@ function render() {
     angle %= 360.0
     
     ms.push();
-    ms.scale(0.8);
+    //ms.scale(0.8);
     cone.MV = ms.current();
     cone.draw();
     ms.pop();
