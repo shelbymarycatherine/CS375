@@ -1,8 +1,6 @@
-i
 let gl = undefined;
-
-const cone = new Cone(gl, 20); //Experiment with different values
-const matrixStack = new matrixStack();
+let cone;
+const matrixStack = new MatrixStack();
 
 function init() {
     let canvas = document.getElementById("webgl-canvas");
@@ -10,6 +8,8 @@ function init() {
     if (!gl) { alert("Your Web browser doesn't support WebGL 2\nPlease contact Dave"); }
 
     // Add initialization code here
+    const cone = new Cone(gl, 20); //Experiment with different values
+    
     program = initShaders(gl, "vertex-shader", "fragment-shader");
 
     uAngle = gl.getUniformLocation(program, "uAngle");
