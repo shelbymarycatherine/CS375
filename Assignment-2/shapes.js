@@ -11,8 +11,10 @@ function init() {
     gl.enable(gl.DEPTH_TEST);
 
     let cone = new cone(gl, 36);
+    let sphere = new Sphere(gl, 36, 18);
     let ms = new MatrixStack();
-    let angle = 0.0;
+    let coneAngle = 0.0;
+    let sphereAngle = 0.0;
     
     render();
 }
@@ -21,13 +23,17 @@ function render() {
     // Add rendering code here
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    angle += 3.0;
-    angle %= 360.0
+    coneAngle += 3.0;
+    coneAngle %= 360.0
+    sphereAngle += 1.0;
+    sphereAngle %= 360.0;
 
     ms.push();
     ms.scale(0.8);
     cone.MV = ms.current();
+    sphere.MV = ms.current();
     cone.draw();
+    sphere.draw();
     ms.pop();
 
     requestAnimationFrame(render);
