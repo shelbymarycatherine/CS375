@@ -28,7 +28,7 @@ function render() {
     matrixStack.push();
     matrixStack.loadIdentity();
     matrixStack.translate(0.0, 0.0);
-    cone.draw;
+    cone.draw();
     matrixStack.pop();
 
    // gl.uniform1f(uAngle, angle);
