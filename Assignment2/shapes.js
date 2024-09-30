@@ -1,5 +1,8 @@
-
+i
 let gl = undefined;
+
+const cone = new Cone(gl, 20); //Experiment with different values
+const matrixStack = new matrixStack();
 
 function init() {
     let canvas = document.getElementById("webgl-canvas");
@@ -22,11 +25,14 @@ function render() {
 
     gl.useProgram(program);
 
-    angle += 5.0;
-    angle %= 360.0;
+    matrixStack.push();
+    matrixStack.loadIdentity();
+    matrixStack.translate(0.0, 0.0);
+    cone.draw;
+    matrixStack.pop();
 
-    gl.uniform1f(uAngle, angle);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
+   // gl.uniform1f(uAngle, angle);
+  //  gl.drawArrays(gl.TRIANGLES, 0, 3);
 
     requestAnimationFrame(render);
 }
