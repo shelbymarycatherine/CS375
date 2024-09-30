@@ -8,8 +8,9 @@ function init() {
 
     // Add initialization code here
     gl.clearColor(0.2, 0.2, 0.2, 1.0);
+    gl.enable(gl.DEPTH_TEST);
 
-    let axes = new Axes(gl);
+    let cone = new cone(gl, 36);
     let ms = new MatrixStack();
     let angle = 0.0;
     
@@ -25,8 +26,9 @@ function render() {
 
     ms.push();
     ms.rotate(angle, [1, 1, 0]);
-    axes.MV = ms.current();
-    axes.draw();
+    ms.scale(0.8);
+    cone.MV = ms.current();
+    cone.draw();
     ms.pop();
 
     requestAnimationFrame(render);
