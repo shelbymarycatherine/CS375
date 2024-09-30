@@ -13,6 +13,9 @@ function init() {
     gl.enable(gl.DEPTH_TEST);
 
     let cone = new Cone(gl, 36);
+    let sphere = new Sphere(gl, 36, 18);
+    let cylinder = new Cylinder(gl, 36);
+    
     let ms = new MatrixStack();
     let angle = 0.0;
     
@@ -25,13 +28,31 @@ function render() {
 
     angle += 3.0;
     angle %= 360.0
-    
+
+    // Render cone
     ms.push();
-    //ms.scale(0.8);
+    ms.translate([0.0, 0.0, 0.0]);
+    ms.scale(0.8);
     cone.MV = ms.current();
     cone.draw();
     ms.pop();
 
+    // Render sphere to left of cone
+    ms.push();
+    ms.translate([-2.0, 0.0, 0.0]);
+    ms.scale(0.8);
+    sphere.MV = ms.current();
+    sphere.draw();
+    ms.pop();
+
+    // Render cylinder to right of cone
+    ms.push();
+    ms.translate([2.0, 0.0, 0.0]);
+    ms.scale(0.8);
+    cylinder.MV = ms.current();
+    cylinder.draw();
+    ms.pop();
+    
     requestAnimationFrame(render);
 }
 
