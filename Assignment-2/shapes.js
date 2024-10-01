@@ -17,7 +17,7 @@ function init() {
     gl.enable(gl.DEPTH_TEST);
 
     cone = new Cone(gl, 36);
-    sphere = new Sphere(gl, 18, 9);
+    sphere = new Sphere(gl, 36, 18);
     cylinder = new Cylinder(gl, 36);
     
     ms = new MatrixStack();
