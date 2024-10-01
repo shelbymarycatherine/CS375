@@ -42,16 +42,16 @@ function render() {
 
     // Render sphere to left of cone
     ms.push();
-    ms.translate([-360.0, 0.0, 0.0]);
     ms.scale(0.2);
+    ms.translate([-360.0, 0.0, 0.0]);
     sphere.MV = ms.current();
     sphere.draw();
     ms.pop();
 
     // Render cylinder to right of cone
     ms.push();
-    ms.translate([-3.0, 0.0, 0.0]);
     ms.scale(0.8);
+    ms.translate([-3.0, 0.0, 0.0]);
     cylinder.MV = ms.current();
     cylinder.draw();
     ms.pop();
