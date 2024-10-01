@@ -22,42 +22,44 @@ function init() {
     
     ms = new MatrixStack();
     angle = 0.0;
+
+    function render() {
+        // Add rendering code here
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+        angle += 3.0;
+        angle %= 360.0
+
+        // Render cone
+        ms.push();
+        ms.scale(0.8);
+        cone.MV = ms.current();
+        cone.draw();
+        ms.pop();
+
+    // Render sphere to left of cone
+        ms.push();
+        ms.scale(0.2);
+        ms.translate([-360.0, 0.0, 0.0]);
+        sphere.MV = ms.current();
+        sphere.draw();
+        ms.pop();
+
+        // Render cylinder to right of cone
+        ms.push();
+        ms.scale(0.8);
+        ms.translate([-3.0, 0.0, 0.0]);
+        cylinder.MV = ms.current();
+        cylinder.draw();
+        ms.pop();
     
+        requestAnimationFrame(render);
+    }
+
     render();
 }
 
-function render() {
-    // Add rendering code here
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    angle += 3.0;
-    angle %= 360.0
-
-    // Render cone
-    ms.push();
-    ms.scale(0.8);
-    cone.MV = ms.current();
-    cone.draw();
-    ms.pop();
-
-    // Render sphere to left of cone
-    ms.push();
-    ms.scale(0.2);
-    ms.translate([-360.0, 0.0, 0.0]);
-    sphere.MV = ms.current();
-    sphere.draw();
-    ms.pop();
-
-    // Render cylinder to right of cone
-    ms.push();
-    ms.scale(0.8);
-    ms.translate([-3.0, 0.0, 0.0]);
-    cylinder.MV = ms.current();
-    cylinder.draw();
-    ms.pop();
-    
-    requestAnimationFrame(render);
-}
 
 window.onload = init;
 
