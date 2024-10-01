@@ -35,7 +35,6 @@ function render() {
 
     // Render cone
     ms.push();
-    ms.translate([0.0, 0.0, 0.0]);
     ms.scale(0.8);
     cone.MV = ms.current();
     cone.draw();
