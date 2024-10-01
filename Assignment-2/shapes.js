@@ -42,7 +42,7 @@ function render() {
 
     // Render sphere to left of cone
     ms.push();
-    ms.translate([-2.0, 0.0, 0.0]);
+    ms.translate([16.0, 0.0, 0.0]);
     ms.scale(0.8);
     sphere.MV = ms.current();
     sphere.draw();
@@ -50,7 +50,7 @@ function render() {
 
     // Render cylinder to right of cone
     ms.push();
-    ms.translate([2.0, 0.0, 0.0]);
+    ms.translate([-3.0, 0.0, 0.0]);
     ms.scale(0.8);
     cylinder.MV = ms.current();
     cylinder.draw();
