@@ -32,8 +32,9 @@ function init() {
 
         // Render cone
         ms.push();
-        ms.scale(0.8);
+        ms.scale(0.5 0.25, 0.5);
         cone.MV = ms.current();
+        cone.color = vec4(1.0, 0.75, 0.8, 1.0);
         cone.draw();
         ms.pop();
 
