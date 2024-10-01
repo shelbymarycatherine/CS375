@@ -13,7 +13,7 @@ function init() {
     gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
 
     // Add initialization code here
-    gl.clearColor(0.2, 0.2, 0.2, 1.0);
+    gl.clearColor(0.8, 0.8, 0.8, 9.0);
     gl.enable(gl.DEPTH_TEST);
 
     cone = new Cone(gl, 36);
