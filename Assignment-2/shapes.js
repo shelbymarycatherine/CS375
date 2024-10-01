@@ -42,7 +42,7 @@ function render() {
 
     // Render sphere to left of cone
     ms.push();
-    ms.translate([360.0, 0.0, 0.0]);
+    ms.translate([-360.0, 0.0, 0.0]);
     ms.scale(0.2);
     sphere.MV = ms.current();
     sphere.draw();
