@@ -40,6 +40,7 @@ function render() {
     cone.draw();
     ms.pop();
 
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     // Render sphere to left of cone
     ms.push();
     ms.scale(0.2);
@@ -48,6 +49,7 @@ function render() {
     sphere.draw();
     ms.pop();
 
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     // Render cylinder to right of cone
     ms.push();
     ms.scale(0.8);
