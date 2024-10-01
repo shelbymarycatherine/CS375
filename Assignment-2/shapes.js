@@ -10,7 +10,7 @@ function init() {
     gl = canvas.getContext("webgl2");
     if (!gl) { alert("Your Web browser doesn't support WebGL 2\nPlease contact Dave"); }
 
-    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+    //gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
 
     // Add initialization code here
     gl.clearColor(0.2, 0.2, 0.2, 1.0);
