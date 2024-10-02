@@ -42,8 +42,8 @@ function init() {
         // Render sphere
         ms.push();
         ms.scale(0.2);
-        ms.translate([-3.0, -3.0, 2.0]);
         ms.rotate(angle, [0.1, 0.0, 0.0]);
+        ms.translate([-3.0, -3.0, 2.0]);
         sphere.MV = ms.current();
         sphere.color = vec4(0.2, 0.8, 0.8, 1.0);
         sphere.draw();
@@ -52,8 +52,8 @@ function init() {
         // Render cylinder
         ms.push();
         ms.scale(0.2);
-        ms.rotate(angle, [0.0, 0.1, 0.0]);
         ms.translate([-3.0, 3.0, 0.0]);
+        ms.rotate(angle, [0.1, 0.0, 0.0]);
         cylinder.MV = ms.current();
         cylinder.draw();
         ms.pop();
