@@ -32,7 +32,7 @@ function init() {
         
         // Render cone
         ms.push();
-        ms.scale(0.8);
+        ms.scale(0.2);
         cone.MV = ms.current();
         cone.color = vec4(1.0, 0.75, 0.8, 1.0);
         cone.draw();
@@ -50,7 +50,7 @@ function init() {
 
         // Render cylinder
         ms.push();
-        ms.scale(0.8);
+        ms.scale(0.2);
         ms.translate([-3.0, 0.0, 0.0]);
         cylinder.MV = ms.current();
         cylinder.draw();
