@@ -4,7 +4,6 @@ let cylinder;
 let ms;
 let angle;
 let gl = undefined;
-let uAngle = undefined; //NEW
 
 function init() {
     let canvas = document.getElementById("webgl-canvas");
@@ -42,6 +41,7 @@ function init() {
     // Render sphere
         ms.push();
         ms.scale(0.2);
+        ms.rotate(angle, [0.0, 0.1, 0.0]);
         ms.translate([-3.0, 0.0, 2.0]);
         sphere.MV = ms.current();
         sphere.color = vec4(0.2, 0.8, 0.8, 1.0);
