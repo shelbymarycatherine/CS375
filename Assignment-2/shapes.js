@@ -3,7 +3,6 @@ let sphere;
 let cylinder;
 let ms;
 let angle;
-let program;
 let gl = undefined;
 let uAngle = undefined; //NEW
 
@@ -13,10 +12,6 @@ function init() {
     if (!gl) { alert("Your Web browser doesn't support WebGL 2\nPlease contact Dave"); }
 
     //gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
-
-    // NEW
-    program = initShaders(gl, "vertex-shader", "fragment-shader");
-    uAngle = gl.getUniformLocation(program, "uAngle");
     
     // Add initialization code here
     gl.clearColor(0.2, 0.2, 0.2, 1.0);
@@ -32,13 +27,9 @@ function init() {
     function render() {
         // Add rendering code here
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        gl.useProgram(program); //NEW
 
         angle += 3.0;
         angle %= 360.0
-
-        //NEW
-        gl.uniform1f(uAngle, angle);
         
         // Render cone
         ms.push();
