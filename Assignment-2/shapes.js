@@ -31,6 +31,7 @@ function init() {
         // Render cone
         ms.push();
         ms.scale(0.2);
+        ms.rotate(angle, [0.0, 0.1, 0.0]);
         ms.translate([3.0, 0.0, 0.0]);
         cone.MV = ms.current();
         //gl.useProgram(cone.program);
