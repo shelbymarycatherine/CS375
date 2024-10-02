@@ -38,7 +38,7 @@ function init() {
         cone.draw();
         ms.pop();
 
-    // Render sphere to left of cone
+    // Render sphere
         ms.push();
         ms.scale(0.2);
         ms.translate([-3.0, 0.0, 2.0]);
@@ -47,7 +47,7 @@ function init() {
         sphere.draw();
         ms.pop();
 
-        // Render cylinder to right of cone
+        // Render cylinder
         ms.push();
         ms.scale(0.8);
         ms.translate([-3.0, 0.0, 0.0]);
