@@ -41,7 +41,7 @@ function init() {
     // Render sphere to left of cone
         ms.push();
         ms.scale(0.2);
-        ms.translate([-360.0, 0.0, 0.0]);
+        ms.translate([-3.0, 0.0, 2.0]);
         sphere.MV = ms.current();
         sphere.color = vec4(0.2, 0.8, 0.8, 1.0);
         sphere.draw();
