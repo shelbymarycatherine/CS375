@@ -14,7 +14,7 @@ function init() {
     //gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
 
     // NEW
-    let program = initShaders(gl, "vertex-shader, "fragment-shader);
+    let program = initShaders(gl, "vertex-shader", "fragment-shader");
     uAngle = gl.getUniformLocation(program, "uAngle");
     
     // Add initialization code here
@@ -37,7 +37,7 @@ function init() {
         angle %= 360.0
 
         //NEW
-        //gl.uniform1f(uAngle, angle);
+        gl.uniform1f(uAngle, angle);
         
         // Render cone
         ms.push();
