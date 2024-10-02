@@ -4,7 +4,7 @@ let cylinder;
 let ms;
 let angle;
 let gl = undefined;
-let uAngle = undefined;
+let uAngle = undefined; //NEW
 
 function init() {
     let canvas = document.getElementById("webgl-canvas");
@@ -31,12 +31,13 @@ function init() {
     function render() {
         // Add rendering code here
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        gl.useProgram(program);
+        gl.useProgram(program); //NEW
 
         angle += 3.0;
         angle %= 360.0
 
-        gl.uniform1f(uAngle, angle);
+        //NEW
+        //gl.uniform1f(uAngle, angle);
         
         // Render cone
         ms.push();
