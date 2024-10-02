@@ -9,8 +9,6 @@ function init() {
     let canvas = document.getElementById("webgl-canvas");
     gl = canvas.getContext("webgl2");
     if (!gl) { alert("Your Web browser doesn't support WebGL 2\nPlease contact Dave"); }
-
-    //gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
     
     // Add initialization code here
     gl.clearColor(0.2, 0.2, 0.2, 1.0);
@@ -32,8 +30,8 @@ function init() {
         
         // Render cone
         ms.push();
-        ms.scale(0.2);
-        ms.translate([3.0, 2.0, 0.0]);
+        ms.scale(0.7);
+        ms.translate([0.0, 0.0, 0.0]);
         cone.MV = ms.current();
         gl.useProgram(cone.program);
         cone.color = vec4(1.0, 0.75, 0.8, 1.0);
@@ -53,6 +51,7 @@ function init() {
         // Render cylinder
         ms.push();
         ms.scale(0.2);
+        ms.rotate(angle, [0.0, 0.1, 0.0]);
         ms.translate([-3.0, 2.0, 0.0]);
         cylinder.MV = ms.current();
         cylinder.draw();
@@ -63,8 +62,6 @@ function init() {
 
     render();
 }
-
-
 
 window.onload = init;
 
