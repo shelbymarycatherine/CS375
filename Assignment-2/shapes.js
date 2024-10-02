@@ -31,7 +31,7 @@ function init() {
         // Render cone
         ms.push();
         ms.scale(0.2);
-        ms.translate([3.0, 2.0, 0.0]);
+        ms.translate([3.0, 0.0, 0.0]);
         cone.MV = ms.current();
         //gl.useProgram(cone.program);
         cone.color = vec4(1.0, 0.75, 0.8, 1.0);
@@ -42,7 +42,7 @@ function init() {
         ms.push();
         ms.scale(0.2);
         ms.rotate(angle, [0.0, 0.1, 0.0]);
-        ms.translate([-3.0, -2.0, 2.0]);
+        ms.translate([-3.0, -3.0, 2.0]);
         sphere.MV = ms.current();
         sphere.color = vec4(0.2, 0.8, 0.8, 1.0);
         sphere.draw();
@@ -52,7 +52,7 @@ function init() {
         ms.push();
         ms.scale(0.2);
         ms.rotate(angle, [0.0, 0.1, 0.0]);
-        ms.translate([-3.0, 2.0, 0.0]);
+        ms.translate([-3.0, 3.0, 0.0]);
         cylinder.MV = ms.current();
         cylinder.draw();
         ms.pop();
