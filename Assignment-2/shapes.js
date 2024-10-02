@@ -3,6 +3,7 @@ let sphere;
 let cylinder;
 let ms;
 let angle;
+let program;
 let gl = undefined;
 let uAngle = undefined; //NEW
 
@@ -14,7 +15,7 @@ function init() {
     //gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
 
     // NEW
-    let program = initShaders(gl, "vertex-shader", "fragment-shader");
+    program = initShaders(gl, "vertex-shader", "fragment-shader");
     uAngle = gl.getUniformLocation(program, "uAngle");
     
     // Add initialization code here
