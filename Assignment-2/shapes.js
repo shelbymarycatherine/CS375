@@ -4,6 +4,7 @@ let cylinder;
 let ms;
 let angle;
 let gl = undefined;
+let uAngle = undefined;
 
 function init() {
     let canvas = document.getElementById("webgl-canvas");
@@ -12,6 +13,10 @@ function init() {
 
     //gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
 
+    // NEW
+    let program = initShaders(gl, "vertex-shader, "fragment-shader);
+    uAngle = gl.getUniformLocation(program, "uAngle");
+    
     // Add initialization code here
     gl.clearColor(0.2, 0.2, 0.2, 1.0);
     gl.enable(gl.DEPTH_TEST);
@@ -26,10 +31,13 @@ function init() {
     function render() {
         // Add rendering code here
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        gl.useProgram(program);
 
         angle += 3.0;
         angle %= 360.0
 
+        gl.uniform1f(uAngle, angle);
+        
         // Render cone
         ms.push();
         ms.scale(0.8);
