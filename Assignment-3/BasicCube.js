@@ -2,7 +2,7 @@ class BasicCube {
     constructor(gl) {
         this.gl = gl;
 
-        // Define vertices and colors for the cube
+        // Define vertices and colors
         const vertices = new Float32Array([
             // Front face (CCW order)
             -0.5, -0.5,  0.5,  1, 0, 0, // vertex 0
@@ -44,7 +44,7 @@ class BasicCube {
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
 
         // Define shaders
-        this.vertexShader = `
+        this.vertexShaderSource = `
             in vec4 aPosition;
             in vec3 aColor;
             uniform mat4 P;
@@ -58,7 +58,7 @@ class BasicCube {
             }
         `;
 
-        this.fragmentShader = `
+        this.fragmentShaderSource = `
             precision mediump float;
             in vec3 vColor;
             out vec4 FragColor;
@@ -68,10 +68,10 @@ class BasicCube {
             }
         `;
 
-        // Create a ShaderProgram and associate it with the shaders
-        this.program = new ShaderProgram(gl, this.vertexShader, this.fragmentShader);
+        // Create shader program
+        this.program = new ShaderProgram(gl, this.vertexShaderSource, this.fragmentShaderSource);
 
-        // Set up attribute locations
+        // Attribute locations
         this.positionAttribLocation = gl.getAttribLocation(this.program.program, "aPosition");
         this.colorAttribLocation = gl.getAttribLocation(this.program.program, "aColor");
 
@@ -88,7 +88,7 @@ class BasicCube {
         mat4.rotate(rotationMatrix, rotationMatrix, this.rotationAngle, [0, 1, 0]);
         this.program.setUniformMatrix4fv('MV', rotationMatrix);
 
-        // Bind the vertex buffer and set up attributes
+        // Bind and enable attributes
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.vertexBuffer);
         this.gl.vertexAttribPointer(this.positionAttribLocation, 3, this.gl.FLOAT, false, 6 * 4, 0);
         this.gl.enableVertexAttribArray(this.positionAttribLocation);
@@ -96,11 +96,11 @@ class BasicCube {
         this.gl.vertexAttribPointer(this.colorAttribLocation, 3, this.gl.FLOAT, false, 6 * 4, 3 * 4);
         this.gl.enableVertexAttribArray(this.colorAttribLocation);
 
-        // Bind the index buffer and draw
+        // Draw the cube
         this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
         this.gl.drawElements(this.gl.TRIANGLES, this.vertexCount, this.gl.UNSIGNED_SHORT, 0);
 
-        // Disable vertex attributes after draw
+        // Disable vertex attributes
         this.gl.disableVertexAttribArray(this.positionAttribLocation);
         this.gl.disableVertexAttribArray(this.colorAttribLocation);
     }
