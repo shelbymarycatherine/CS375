@@ -1,154 +1,64 @@
-// BasicCube.js
-// A cube defined of 12 triangles
-
 class BasicCube {
-    constructor(gl, vertexShader, fragmentShader) {
-        // Compile and link the shader program
-        this.program = new ShaderProgram(gl, this, vertexShader, fragmentShader);
+    constructor(gl) {
+        this.gl = gl;
 
-        // Define the cube's vertex positions (12 triangles = 36 vertices)
-        const vertices = new Float32Array([
+        // Define vertices and colors for the cube
+        const vertices = [
+            // Front face (CCW order)
+            -0.5, -0.5,  0.5, 1, 0, 0, // vertex 0
+             0.5, -0.5,  0.5, 1, 0, 0, // vertex 1
+             0.5,  0.5,  0.5, 1, 0, 0, // vertex 2
+            -0.5,  0.5,  0.5, 1, 0, 0, // vertex 3
+
+            // Back face (CCW order)
+            -0.5, -0.5, -0.5, 0, 1, 0, // vertex 4
+             0.5, -0.5, -0.5, 0, 1, 0, // vertex 5
+             0.5,  0.5, -0.5, 0, 1, 0, // vertex 6
+            -0.5,  0.5, -0.5, 0, 1, 0, // vertex 7
+        ];
+
+        const indices = [
             // Front face
-            -0.5, -0.5,  0.5,
-             0.5, -0.5,  0.5,
-             0.5,  0.5,  0.5,
-            -0.5, -0.5,  0.5,
-             0.5,  0.5,  0.5,
-            -0.5,  0.5,  0.5,
-
-            // Back face
-            -0.5, -0.5, -0.5,
-            -0.5,  0.5, -0.5,
-             0.5,  0.5, -0.5,
-            -0.5, -0.5, -0.5,
-             0.5,  0.5, -0.5,
-             0.5, -0.5, -0.5,
-
-            // Top face
-            -0.5,  0.5, -0.5,
-            -0.5,  0.5,  0.5,
-             0.5,  0.5,  0.5,
-            -0.5,  0.5, -0.5,
-             0.5,  0.5,  0.5,
-             0.5,  0.5, -0.5,
-
-            // Bottom face
-            -0.5, -0.5, -0.5,
-             0.5, -0.5, -0.5,
-             0.5, -0.5,  0.5,
-            -0.5, -0.5, -0.5,
-             0.5, -0.5,  0.5,
-            -0.5, -0.5,  0.5,
-
+            0, 1, 2,  0, 2, 3,
             // Right face
-             0.5, -0.5, -0.5,
-             0.5,  0.5, -0.5,
-             0.5,  0.5,  0.5,
-             0.5, -0.5, -0.5,
-             0.5,  0.5,  0.5,
-             0.5, -0.5,  0.5,
-
+            1, 5, 6,  1, 6, 2,
+            // Back face
+            4, 7, 6,  4, 6, 5,
             // Left face
-            -0.5, -0.5, -0.5,
-            -0.5, -0.5,  0.5,
-            -0.5,  0.5,  0.5,
-            -0.5, -0.5, -0.5,
-            -0.5,  0.5,  0.5,
-            -0.5,  0.5, -0.5
-        ]);
+            7, 4, 0,  7, 0, 3,
+            // Top face
+            3, 2, 6,  3, 6, 7,
+            // Bottom face
+            4, 5, 1,  4, 1, 0,
+        ];
 
-        // Define colors for the cube (one color per vertex)
-        const colors = new Float32Array([
-            // Front face (red)
-            1.0, 0.0, 0.0,
-            1.0, 0.0, 0.0,
-            1.0, 0.0, 0.0,
-            1.0, 0.0, 0.0,
-            1.0, 0.0, 0.0,
-            1.0, 0.0, 0.0,
-            
-            // Back face (green)
-            0.0, 1.0, 0.0,
-            0.0, 1.0, 0.0,
-            0.0, 1.0, 0.0,
-            0.0, 1.0, 0.0,
-            0.0, 1.0, 0.0,
-            0.0, 1.0, 0.0,
+        this.vertexCount = indices.length;
 
-            // Top face (blue)
-            0.0, 0.0, 1.0,
-            0.0, 0.0, 1.0,
-            0.0, 0.0, 1.0,
-            0.0, 0.0, 1.0,
-            0.0, 0.0, 1.0,
-            0.0, 0.0, 1.0,
-
-            // Bottom face (yellow)
-            1.0, 1.0, 0.0,
-            1.0, 1.0, 0.0,
-            1.0, 1.0, 0.0,
-            1.0, 1.0, 0.0,
-            1.0, 1.0, 0.0,
-            1.0, 1.0, 0.0,
-
-            // Right face (cyan)
-            0.0, 1.0, 1.0,
-            0.0, 1.0, 1.0,
-            0.0, 1.0, 1.0,
-            0.0, 1.0, 1.0,
-            0.0, 1.0, 1.0,
-            0.0, 1.0, 1.0,
-
-            // Left face (magenta)
-            1.0, 0.0, 1.0,
-            1.0, 0.0, 1.0,
-            1.0, 0.0, 1.0,
-            1.0, 0.0, 1.0,
-            1.0, 0.0, 1.0,
-            1.0, 0.0, 1.0
-        ]);
-
-        // Create buffers for vertex positions and colors
+        // Create buffers
         this.vertexBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
 
-        this.colorBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STATIC_DRAW);
-
-        // Store attribute locations
-        this.aPosition = this.program.getAttributeLocation("aPosition");
-        this.aColor = this.program.getAttributeLocation("aColor");
-
-        // Initialize transformation matrices
-        this.MV = mat4();
-        this.P = mat4();
+        this.indexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
     }
 
-    draw(gl) {
-        // Use the shader program
-        this.program.use();
+    draw() {
+        const program = this.gl.program; // assuming this.gl.program is your shader program
+        const positionAttribLocation = this.gl.getAttribLocation(program, "aPosition");
+        const colorAttribLocation = this.gl.getAttribLocation(program, "aColor");
 
-        // Set uniform matrices
-        this.program.setUniform("MV", this.MV);
-        this.program.setUniform("P", this.P);
+        // Enable and set vertex attribute pointers
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.vertexBuffer);
+        this.gl.vertexAttribPointer(positionAttribLocation, 3, this.gl.FLOAT, false, 6 * 4, 0);
+        this.gl.enableVertexAttribArray(positionAttribLocation);
 
-        // Bind and enable vertex buffer
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
-        gl.vertexAttribPointer(this.aPosition, 3, gl.FLOAT, false, 0, 0);
-        gl.enableVertexAttribArray(this.aPosition);
+        this.gl.vertexAttribPointer(colorAttribLocation, 3, this.gl.FLOAT, false, 6 * 4, 3 * 4);
+        this.gl.enableVertexAttribArray(colorAttribLocation);
 
-        // Bind and enable color buffer
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
-        gl.vertexAttribPointer(this.aColor, 3, gl.FLOAT, false, 0, 0);
-        gl.enableVertexAttribArray(this.aColor);
-
-        // Draw the cube (36 vertices)
-        gl.drawArrays(gl.TRIANGLES, 0, 36);
-
-        // Disable attributes
-        gl.disableVertexAttribArray(this.aPosition);
-        gl.disableVertexAttribArray(this.aColor);
+        // Bind index buffer and draw
+        this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
+        this.gl.drawElements(this.gl.TRIANGLES, this.vertexCount, this.gl.UNSIGNED_SHORT, 0);
     }
 }
