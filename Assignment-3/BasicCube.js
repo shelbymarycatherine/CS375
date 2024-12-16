@@ -74,10 +74,19 @@ class BasicCube {
         // Set up attribute locations
         this.positionAttribLocation = gl.getAttribLocation(this.program.program, "aPosition");
         this.colorAttribLocation = gl.getAttribLocation(this.program.program, "aColor");
+
+        // Initialize rotation angle
+        this.rotationAngle = 0;
     }
 
     draw() {
         this.program.use();
+
+        // Update the model view matrix for rotation
+        this.rotationAngle += 0.01; // Increment the rotation angle
+        const rotationMatrix = mat4.create();
+        mat4.rotate(rotationMatrix, rotationMatrix, this.rotationAngle, [0, 1, 0]);
+        this.program.setUniformMatrix4fv('MV', rotationMatrix);
 
         // Bind the vertex buffer and set up attributes
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.vertexBuffer);
